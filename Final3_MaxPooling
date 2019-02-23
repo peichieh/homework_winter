@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+int map[10][10];
+void find_max(int i,int j){
+    int m,n;
+    int max = 0;
+    for (m=0; m<3; m++) {
+        for (n=0; n<3; n++) {
+            if (map[i+m][j+n]>max) {
+                max = map[i+m][j+n];
+            }
+        }
+    }
+    printf("%d",max);
+}
+
+int main(){
+    
+    int num,i,j;
+    
+    int ans[8][8];
+    int num_ans;
+    
+    scanf("%d",&num);
+    num_ans = num -2;
+    for (i=0; i<num; i++) {
+        for (j=0; j<num; j++) {
+            scanf("%d",&map[i][j]);
+        }
+    }
+    
+    for (i=0; i<num_ans; i++) {
+        for (j=0; j<num_ans; j++) {
+            find_max(i, j);
+            if (j<num_ans-1) {
+                printf(" ");
+            }
+            
+            //printf("%d ",ans[i][j]);
+        }
+        
+        printf("\n");
+    }
+    
+    
+    return 0;
+    
+}
+
