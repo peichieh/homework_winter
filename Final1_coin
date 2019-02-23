@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+void plan_coin(int,int);
+int coin[5],ans[5];
+int num,total;
+int main(){
+    
+    int i;
+    scanf("%d",&num);
+    for (i=0; i<num; i++) {
+        scanf("%d",&coin[i]);
+    }
+    scanf("%d",&total);
+    /*
+    printf("%d\n",num);
+    for (i=0; i<num; i++) {
+        printf("%d ",coin[i]);
+    }
+    printf("\n%d\n",total);
+     */
+    plan_coin(0,0);
+    
+    return 0;
+}
+void print_ans(void){
+    int i;
+    printf("(");
+    for (i=0; i<num-1; i++) {
+        printf("%d,",ans[i]);
+    }
+    printf("%d)\n",ans[num-1]);
+}
+void plan_coin(int now, int place){
+    //printf("here!\n");
+    if (place==num) {
+        //printf("hey\n");
+        if (now==total) {
+            print_ans();
+        }
+        return;
+    }
+    int max = (total-now)/coin[place];
+    int i;
+    for (i=0; i<=max; i++) {
+        ans[place] = i;
+        plan_coin(now + coin[place]*i, place+1);
+    }
+    
+}
