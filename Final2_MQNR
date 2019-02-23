@@ -1,0 +1,92 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
+void place(int cur_row,int nQueen,int nRook,int leng);
+int valid_q(int row,int col);
+int valid_c(int row,int col);
+int queen,rook;
+int ways=0;
+int q[10]={0},r[10]={0};
+    
+int main(){
+        
+        
+    int leng;
+    scanf("%d %d",&queen,&rook);
+    leng = queen + rook;
+    place(0, 0, 0, leng);
+    printf("%d\n",ways);
+        
+    return 0;
+}
+    
+void place(int cur_row,int nQueen,int nRook,int leng){
+    int i;
+    q[cur_row]=-1;
+    r[cur_row]=-1;
+    if (cur_row==leng) {
+        ways++;
+        return;
+    }
+    else{
+        for (i = 0; i<leng; i++) {
+            if (nQueen<queen && valid_q(cur_row, i)==1) {
+                //printf("queen:(%d,%d)\n",cur_row,i);
+                q[cur_row]=i;
+                place(cur_row+1, nQueen+1, nRook, leng);
+                q[cur_row]=-1;
+                
+            }
+            if (nRook<rook && valid_c(cur_row, i)==1) {
+                //printf("rook:(%d,%d)\n",cur_row,i);
+                r[cur_row]=i;
+                place(cur_row+1, nQueen, nRook+1, leng);
+                r[cur_row]=-1;
+            }
+        }
+        
+            
+    }
+        
+}
+int valid_q(int row, int col ){
+    
+    int i;
+    for (i=0; i<row; i++) {
+        if (r[i]!=-1) {
+            if (r[i]==col|| r[i] == col-row+i || r[i] == col+row-i) {
+                return 0;
+            }
+        }
+        else if (q[i]!=-1) {
+            if (q[i] == col || q[i] == col-row+i || q[i] == col+row-i||q[i]==col){
+                return 0;
+            }
+        }
+        
+    }
+    
+    return 1;
+    
+}
+int valid_c(int row, int col ){
+    
+    int i;
+    for (i=0; i<row; i++) {
+        if (r[i]!=-1) {
+            if (r[i]==col) {
+                return 0;
+            }
+        }
+        else if (q[i]!=-1) {
+            if (q[i] == col || q[i] == col-row+i || q[i] == col+row-i||q[i]==col){
+                return 0;
+            }
+        }
+    }
+    
+    return 1;
+    
+}
