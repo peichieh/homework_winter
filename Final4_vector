@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
+
+
+int main(){
+    int ad1[100000],ad2[100000];
+    int num1[100000],num2[100000];
+    int leng1,leng2;
+    long long int sum=0;
+    int i=-1,j;
+    do {
+        i++;
+        scanf("%d:%d",&ad1[i],&num1[i]);
+        
+    } while (ad1[i]!=0&&num1[i]!=0);
+    
+    leng1 = i+1;
+    
+    i = -1;
+    do {
+        i++;
+        scanf("%d:%d",&ad2[i],&num2[i]);
+        
+    } while (ad2[i]!=0&&num2[i]!=0);
+    leng2 = i+1;
+    
+    for (i=0; i<leng1; i++) {
+        for (j=0; j<leng2; j++) {
+            if (ad1[i]==ad2[j]) {
+                sum += num1[i]*num2[j];
+            }
+        }
+    }
+    printf("%lld\n",sum);
+    
+}
